@@ -86,7 +86,7 @@ class Archive extends Component {
 
         <table className="table">
           <tbody>
-            <tr><th>Time</th><th>Todo</th><th>Status</th><th>Action</th></tr>
+            <tr><th>Time</th><th>To Do</th><th>Status</th><th>Action</th></tr>
             {todos.map(todo =>
               (
                 <tr key={todo.id}>

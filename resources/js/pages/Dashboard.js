@@ -95,7 +95,7 @@ class Dashboard extends Component {
                   id="addTodo"
                   name="todo"
                   className="form-control mr-3"
-                  placeholder="Add todo"
+                  placeholder="Build a To Do app..."
                   onChange={this.handleChange}
                 />
                 <button type="submit" className="btn btn-primary">Add</button>
