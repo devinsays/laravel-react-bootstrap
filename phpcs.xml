@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="PHP_CodeSniffer">
+    <description>The coding standard for our project.</description>
+    <file>app</file>
+    <file>database</file>
+    <file>tests</file>
+    <exclude-pattern>*/migrations/*</exclude-pattern>
+    <arg value="np"/>
+    <rule ref="PSR2"/>
+
+    <!-- ignore ERROR: Each class must be in a namespace of at least one level (a top-level vendor name) -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+      <exclude-pattern>/database/migrations/</exclude-pattern>
+      <exclude-pattern>/database/seeds/</exclude-pattern>
+    </rule>
+</ruleset>
