@@ -32,11 +32,6 @@ git clone https://github.com/devinsays/laravel-react-bootstrap
 cp .env.example .env
 ```
 
-#### Generate an app key:
-```bash
-php artisan key:generate
-```
-
 *The app key is used to salt passwords. If you need to work with production data you'll want to use the same app key as defined in the .env file in production so password hashes match.*
 
 #### Update these settings in the .env file:
@@ -53,6 +48,11 @@ composer install
 ```
 
 *If you don't have Composer installed, [instructions here](https://getcomposer.org/).*
+
+#### Generate an app key:
+```bash
+php artisan key:generate
+```
 
 #### Generate JWT keys for the .env file:
 ```bash
@@ -87,6 +87,13 @@ php artisan migrate:refresh --seed --force
 ```
 
 Read more in []/docs/database-seeds.md](https://github.com/devinsays/laravel-react-bootstrap/blob/master/docs/database-seeds.md).
+
+#### Seeded User
+
+After seeding the database, you can log in with these credentials:
+
+Email: `user@test.dev`
+Password: `password`
 
 #### Email Driver
 
