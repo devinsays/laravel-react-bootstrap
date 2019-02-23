@@ -11,17 +11,17 @@
     },
     "dependencies": {
         "axios": "^0.18",
-        "bootstrap": "^4.0.0",
+        "bootstrap": "^4.3.1",
         "classnames": "^2.2.6",
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
-        "prop-types": "^15.7.1",
-        "react": "^16.2.0",
-        "react-dom": "^16.2.0",
-        "react-redux": "^6.0.0",
+        "prop-types": "^15.7.2",
+        "react": "^16.8.3",
+        "react-dom": "^16.8.3",
+        "react-redux": "^6.0.1",
         "react-router": "^4.3.1",
         "react-router-dom": "^4.3.1",
         "reactstrap": "^7.1.0",
@@ -29,14 +29,14 @@
         "redux-persist": "^5.10.0",
         "redux-thunk": "^2.3.0",
         "ree-validate": "^3.0.2",
-        "resolve-url-loader": "^2.3.1"
+        "resolve-url-loader": "^2.3.2"
     },
     "devDependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.3.0",
+        "@babel/plugin-proposal-class-properties": "^7.3.3",
         "@babel/preset-react": "^7.0.0",
         "babel-eslint": "^10.0.1",
-        "eslint": "^5.13.0",
-        "sass": "^1.15.2",
+        "eslint": "^5.14.1",
+        "sass": "^1.17.2",
         "sass-loader": "^7.1.0"
     }
 }
