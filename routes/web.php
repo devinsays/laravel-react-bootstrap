@@ -17,4 +17,4 @@ Route::get('reset-password', function() {
 // Catches all other web routes.
 Route::get('{slug}', function () {
     return view('index');
-})->where('slug', '(?!api)([A-z\d-\/_.]+)?');
+})->where('slug', '^(?!api).*$');
