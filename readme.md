@@ -17,7 +17,7 @@ This project runs on a LEMP stack (Linux, NGINX, MySQL, & PHP).
 
 The backend built with Laravel. The frontend is 100% React.
 
-If you don't already have a LEMP environment running, [Valet](https://laravel.com/docs/5.7/valet) is a good option for OSX.
+If you don't already have a LEMP environment running, [Valet](https://laravel.com/docs/valet) is a good option for OSX.
 
 ## Set Up
 
@@ -86,7 +86,7 @@ If you need sample data to work with, you can seed the database:
 php artisan migrate:refresh --seed --force
 ```
 
-Read more in []/docs/database-seeds.md](https://github.com/devinsays/laravel-react-bootstrap/blob/master/docs/database-seeds.md).
+Read more in [/docs/database-seeds.md](https://github.com/devinsays/laravel-react-bootstrap/blob/master/docs/database-seeds.md).
 
 #### Seeded User
 
@@ -109,7 +109,7 @@ Laravel sends emails for password resets. The default for MAIL_DRIVER in .env.ex
 
 **Laravel Docs:**
 
-[https://laravel.com/docs/5.7/valet](https://laravel.com/docs/5.7/valet)
+[https://laravel.com/docs/](https://laravel.com/docs/)
 
 **Valet Tutorial:**
 
