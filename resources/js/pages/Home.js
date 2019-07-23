@@ -114,7 +114,8 @@ class Home extends Component {
               <div className="section-about col-lg-6 mb-4 mb-lg-0">
                 <div>
                   <h2>Example To Do App</h2>
-                  <p>Built with Laravel and React.</p>
+                  <p>Built with Laravel and React. Includes JWT auth, registration, login, routing and tests. <a href="https://wptheming.com/2019/02/building-a-react-app-on-laravel/">Learn more</a>.</p>
+                  <p><a href="https://github.com/devinsays/laravel-react-bootstrap">Source code and documentation on GitHub.</a></p>
                 </div>
               </div>
               <div className="section-login col-lg-6">

@@ -11,6 +11,12 @@ An example To Do App built with Laravel and React. It includes:
 
 Use it as a base for quick prototypes or to learn from. Suggestions, recommendations, and pull requests welcome!
 
+## Demo Site
+
+View a demo of the app at [laravelreact.com](https://laravelreact.com/).
+
+(Password resets will not be sent from this server. Data will be cleared on a regular basis.)
+
 ## Development Environment
 
 This project runs on a LEMP stack (Linux, NGINX, MySQL, & PHP).
