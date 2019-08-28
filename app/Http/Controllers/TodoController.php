@@ -36,6 +36,11 @@ class TodoController extends ApiController
 
         $collection = $collection->latest()->paginate();
 
+        // Appends "status" to pagination links if present in the query.
+        if ($status) {
+            $collection = $collection->appends('status', $status);
+        }
+
         return new TodoCollection($collection);
     }
 
