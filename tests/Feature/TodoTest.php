@@ -113,4 +113,39 @@ class TodoTest extends TestCase
             'status' => 'open'
         ]);
     }
+
+    /** @test */
+    public function userCanGetTheirTodos()
+    {
+        $user = factory(User::class)->create();
+        $todo = factory(Todo::class, 20)->create([
+            'user_id' => $user->id,
+            'status' => 'open'
+        ]);
+        $todo = factory(Todo::class, 30)->create([
+            'user_id' => $user->id,
+            'status' => 'closed'
+        ]);
+
+        // Verifies todo count is correct at /todos endpoints.
+        $response = $this->actingAs($user)->json('GET', $this->api_todo);
+        $response->assertStatus(200);
+        $this->assertEquals(50, $response->getData()->meta->total);
+
+        // Verifies todo count is when 'open' query string is set.
+        $response = $this->actingAs($user)->json('GET', $this->api_todo . '?status=open');
+        $response->assertStatus(200);
+
+        // Verifies pagination is working correctly with query string.
+        $this->assertEquals(20, $response->getData()->meta->total);
+        $this->assertStringContainsString('status=open&page=2', $response->getData()->links->next);
+
+        // Verifies todo count is when 'closed' query string is set.
+        $response = $this->actingAs($user)->json('GET', $this->api_todo . '?status=closed');
+        $response->assertStatus(200);
+
+        // Verifies pagination is working correctly with query string.
+        $this->assertEquals(30, $response->getData()->meta->total);
+        $this->assertStringContainsString('status=closed&page=2', $response->getData()->links->next);
+    }
 }
