@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import ReeValidate from 'ree-validate';
-import classNames from 'classnames';
-import AuthService from '../services';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import ReeValidate from "ree-validate";
+import classNames from "classnames";
+import AuthService from "../services";
 
 class Login extends Component {
   constructor() {
     super();
 
     this.validator = new ReeValidate({
-      email: 'required|email',
-      password: 'required|min:6',
+      email: "required|email",
+      password: "required|min:6"
     });
 
     this.state = {
       loading: false,
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       errors: {},
       response: {
         error: false,
-        message: '',
-      },
+        message: ""
+      }
     };
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
 
@@ -42,13 +42,13 @@ class Login extends Component {
         }
       });
     }
-  }
+  };
 
-  handleBlur = (e) => {
+  handleBlur = e => {
     const { name, value } = e.target;
 
     // Avoid validation until input has a value.
-    if (value === '') {
+    if (value === "") {
       return;
     }
 
@@ -60,51 +60,47 @@ class Login extends Component {
         this.setState({ errors });
       }
     });
-  }
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     const { email, password } = this.state;
     const credentials = {
       email,
-      password,
+      password
     };
 
     // Set response state back to default.
-    this.setState({ response: { error: false, message: '' } });
+    this.setState({ response: { error: false, message: "" } });
 
-    this.validator.validateAll(credentials)
-      .then((success) => {
-        if (success) {
-          this.setState({ loading: true });
-          this.submit(credentials);
-        }
-      });
-  }
+    this.validator.validateAll(credentials).then(success => {
+      if (success) {
+        this.setState({ loading: true });
+        this.submit(credentials);
+      }
+    });
+  };
 
   submit(credentials) {
-    this.props.dispatch(AuthService.login(credentials))
-      .catch((err) => {
-        this.loginForm.reset();
-        const errors = Object.values(err.errors);
-        errors.join(' ');
-        const response = {
-          error: true,
-          message: errors,
-        };
-        this.setState({ response });
-        this.setState({ loading: false });
-      });
+    this.props.dispatch(AuthService.login(credentials)).catch(err => {
+      this.loginForm.reset();
+      const errors = Object.values(err.errors);
+      errors.join(" ");
+      const response = {
+        error: true,
+        message: errors
+      };
+      this.setState({ response });
+      this.setState({ loading: false });
+    });
   }
 
   render() {
     // If user is already authenticated we redirect to entry location.
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { isAuthenticated } = this.props;
     if (isAuthenticated) {
-      return (
-        <Redirect to={from} />
-      );
+      return <Redirect to={from} />;
     }
 
     const { response, errors, loading } = this.state;
@@ -115,27 +111,35 @@ class Login extends Component {
           <div className="container">
             <div className="row">
               <div className="section-login col-lg-6 ml-auto mr-auto">
-
                 <h4>Log in to the App</h4>
 
                 <div className="card-login card mb-3">
                   <div className="card-body">
+                    {response.error && (
+                      <div
+                        className="alert alert-danger text-center"
+                        role="alert"
+                      >
+                        Credentials were incorrect. Try again!
+                      </div>
+                    )}
 
-                    {response.error &&
-                    <div className="alert alert-danger text-center" role="alert">
-                      Credentials were incorrect. Try again!
-                    </div>
-                    }
-
-                    <form className="form-horizontal" method="POST" onSubmit={this.handleSubmit} ref={(el) => { this.loginForm = el; }}>
+                    <form
+                      className="form-horizontal"
+                      method="POST"
+                      onSubmit={this.handleSubmit}
+                      ref={el => {
+                        this.loginForm = el;
+                      }}
+                    >
                       <div className="form-group">
                         <label htmlFor="email">Email Address</label>
                         <input
                           id="email"
                           type="email"
                           name="email"
-                          className={classNames('form-control', {
-                            'is-invalid': ('email' in errors),
+                          className={classNames("form-control", {
+                            "is-invalid": "email" in errors
                           })}
                           placeholder="Enter email"
                           required
@@ -144,9 +148,9 @@ class Login extends Component {
                           disabled={loading}
                         />
 
-                        {('email' in errors) &&
-                        <div className="invalid-feedback">{ errors.email }</div>
-                        }
+                        {"email" in errors && (
+                          <div className="invalid-feedback">{errors.email}</div>
+                        )}
                       </div>
 
                       <div className="form-group">
@@ -154,8 +158,8 @@ class Login extends Component {
                         <input
                           id="password"
                           type="password"
-                          className={classNames('form-control', {
-                            'is-invalid': ('password' in errors),
+                          className={classNames("form-control", {
+                            "is-invalid": "password" in errors
                           })}
                           name="password"
                           placeholder="Enter password"
@@ -164,23 +168,31 @@ class Login extends Component {
                           onBlur={this.handleBlur}
                           disabled={loading}
                         />
-                        {('password' in errors) &&
-                        <div className="invalid-feedback">{ errors.password }</div>
-                        }
+                        {"password" in errors && (
+                          <div className="invalid-feedback">
+                            {errors.password}
+                          </div>
+                        )}
                       </div>
 
                       <div className="form-group text-center">
                         <button
                           type="submit"
-                          className={classNames('btn btn-primary', {
-                            'btn-loading': loading,
+                          className={classNames("btn btn-primary", {
+                            "btn-loading": loading
                           })}
                         >
                           Sign In
                         </button>
                       </div>
 
-                      <div className="login-invite-text text-center">No account? <Link to="/register" href="/register">Register</Link>.</div>
+                      <div className="login-invite-text text-center">
+                        No account?{" "}
+                        <Link to="/register" href="/register">
+                          Register
+                        </Link>
+                        .
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -191,7 +203,6 @@ class Login extends Component {
                   </Link>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -203,9 +214,9 @@ class Login extends Component {
 Login.defaultProps = {
   location: {
     state: {
-      pathname: '/',
-    },
-  },
+      pathname: "/"
+    }
+  }
 };
 
 Login.propTypes = {
@@ -213,13 +224,13 @@ Login.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     state: {
-      pathname: PropTypes.string,
-    },
-  }),
+      pathname: PropTypes.string
+    }
+  })
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.Auth.isAuthenticated,
+  isAuthenticated: state.Auth.isAuthenticated
 });
 
 export default connect(mapStateToProps)(Login);

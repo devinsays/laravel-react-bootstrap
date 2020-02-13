@@ -10,32 +10,32 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "dependencies": {
-        "axios": "^0.19.0",
-        "bootstrap": "^4.3.1",
+        "axios": "^0.19.2",
+        "bootstrap": "^4.4.1",
         "classnames": "^2.2.6",
-        "cross-env": "^5.1",
-        "laravel-mix": "^4.1.2",
+        "cross-env": "^5.2.1",
+        "laravel-mix": "^4.1.4",
         "lodash": "^4.17.15",
-        "popper.js": "^1.15.0",
+        "popper.js": "^1.16.1",
         "prop-types": "^15.7.2",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "react-redux": "^7.1.0",
-        "react-router": "^5.0.1",
-        "react-router-dom": "^5.0.1",
-        "reactstrap": "^8.0.1",
-        "redux": "^4.0.4",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-redux": "^7.1.3",
+        "react-router": "^5.1.2",
+        "react-router-dom": "^5.1.2",
+        "reactstrap": "^8.4.1",
+        "redux": "^4.0.5",
         "redux-persist": "^5.10.0",
         "redux-thunk": "^2.3.0",
-        "ree-validate": "^3.0.2",
-        "resolve-url-loader": "^3.1.0"
+        "ree-validate": "3.0.2",
+        "resolve-url-loader": "^3.1.1"
     },
     "devDependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.5.5",
-        "@babel/preset-react": "^7.0.0",
-        "babel-eslint": "^10.0.2",
-        "eslint": "^6.1.0",
-        "sass": "^1.22.7",
-        "sass-loader": "^7.1.0"
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/preset-react": "^7.8.3",
+        "babel-eslint": "^10.0.3",
+        "eslint": "^6.8.0",
+        "sass": "^1.25.0",
+        "sass-loader": "^7.3.1"
     }
 }

@@ -1,56 +1,56 @@
-import Home from '../pages/Home';
-import Login from '../pages/Login';
-import Dashboard from '../pages/Dashboard';
-import Register from '../pages/Register';
-import ForgotPassword from '../pages/ForgotPassword';
-import ResetPassword from '../pages/ResetPassword';
-import Archive from '../pages/Archive';
-import NoMatch from '../pages/NoMatch';
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Dashboard from "../pages/Dashboard";
+import Register from "../pages/Register";
+import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword";
+import Archive from "../pages/Archive";
+import NoMatch from "../pages/NoMatch";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     exact: true,
     auth: true,
     component: Dashboard,
-    fallback: Home,
+    fallback: Home
   },
   {
-    path: '/login',
+    path: "/login",
     exact: true,
     auth: false,
-    component: Login,
+    component: Login
   },
   {
-    path: '/register',
+    path: "/register",
     exact: true,
     auth: false,
-    component: Register,
+    component: Register
   },
   {
-    path: '/forgot-password',
+    path: "/forgot-password",
     exact: true,
     auth: false,
-    component: ForgotPassword,
+    component: ForgotPassword
   },
   {
-    path: '/reset-password',
+    path: "/reset-password",
     exact: true,
     auth: false,
-    component: ResetPassword,
+    component: ResetPassword
   },
   {
-    path: '/archive',
+    path: "/archive",
     exact: true,
     auth: true,
-    component: Archive,
+    component: Archive
   },
   {
-    path: '',
+    path: "",
     exact: false,
     auth: false,
-    component: NoMatch,
-  },
+    component: NoMatch
+  }
 ];
 
 export default routes;

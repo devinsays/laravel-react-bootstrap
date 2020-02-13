@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import ReeValidate from 'ree-validate';
-import classNames from 'classnames';
-import AuthService from '../services';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import ReeValidate from "ree-validate";
+import classNames from "classnames";
+import AuthService from "../services";
 
 class ForgotPassword extends Component {
   constructor() {
     super();
 
     this.validator = new ReeValidate({
-      email: 'required|email',
+      email: "required|email"
     });
 
     this.state = {
       loading: false,
-      email: '',
+      email: "",
       errors: {},
       response: {
         error: false,
-        message: '',
-      },
+        message: ""
+      }
     };
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
 
@@ -40,14 +40,14 @@ class ForgotPassword extends Component {
         }
       });
     }
-  }
+  };
 
-  handleBlur = (e) => {
+  handleBlur = e => {
     const { name, value } = e.target;
     const validation = this.validator.errors;
 
     // Avoid validation until input has a value.
-    if (value === '') {
+    if (value === "") {
       return;
     }
 
@@ -58,43 +58,43 @@ class ForgotPassword extends Component {
         this.setState({ errors });
       }
     });
-  }
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     const credentials = {
-      email: this.state.email,
+      email: this.state.email
     };
 
     // Set response state back to default.
-    this.setState({ response: { error: false, message: '' } });
+    this.setState({ response: { error: false, message: "" } });
 
-    this.validator.validateAll(credentials)
-      .then((success) => {
-        if (success) {
-          this.setState({ loading: true });
-          this.submit(credentials);
-        }
-      });
-  }
+    this.validator.validateAll(credentials).then(success => {
+      if (success) {
+        this.setState({ loading: true });
+        this.submit(credentials);
+      }
+    });
+  };
 
   submit(credentials) {
-    this.props.dispatch(AuthService.resetPassword(credentials))
-      .then((res) => {
+    this.props
+      .dispatch(AuthService.resetPassword(credentials))
+      .then(res => {
         this.forgotPasswordForm.reset();
         const response = {
           error: false,
-          message: res.message,
+          message: res.message
         };
         this.setState({ loading: false, success: true, response });
       })
-      .catch((err) => {
+      .catch(err => {
         this.forgotPasswordForm.reset();
         const errors = Object.values(err.errors);
-        errors.join(' ');
+        errors.join(" ");
         const response = {
           error: true,
-          message: errors,
+          message: errors
         };
         this.setState({ response });
         this.setState({ loading: false });
@@ -103,12 +103,10 @@ class ForgotPassword extends Component {
 
   render() {
     // If user is already authenticated we redirect to entry location.
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { isAuthenticated } = this.props;
     if (isAuthenticated) {
-      return (
-        <Redirect to={from} />
-      );
+      return <Redirect to={from} />;
     }
 
     const { response, errors, loading } = this.state;
@@ -119,68 +117,75 @@ class ForgotPassword extends Component {
           <div className="container">
             <div className="row">
               <div className="section-login col-lg-6 ml-auto mr-auto">
-
                 <h4>Request Password Reset</h4>
 
                 <div className="card-login card mb-3">
                   <div className="card-body">
-
-                    {this.state.success &&
-                    <div className="alert alert-success text-center" role="alert">
-                      A password reset link has been sent!
-                    </div>
-                    }
-
-                    {response.error &&
-                    <div className="alert alert-danger text-center" role="alert">
-                      { response.message }
-                    </div>
-                    }
-
-                    {!this.state.success &&
-                    <form className="form-horizontal" method="POST" onSubmit={this.handleSubmit} ref={(el) => { this.forgotPasswordForm = el; }}>
-
-                      <div className="form-group">
-                        <label htmlFor="email">Email Address</label>
-                        <input
-                          id="email"
-                          type="email"
-                          name="email"
-                          className={classNames('form-control', {
-                              'is-invalid': ('email' in errors),
-                            })
-                          }
-                          placeholder="Enter email"
-                          required
-                          onChange={this.handleChange}
-                          onBlur={this.handleBlur}
-                          disabled={loading}
-                        />
-
-                        {('email' in errors) &&
-                        <div className="invalid-feedback">{ errors.email }</div>
-                        }
+                    {this.state.success && (
+                      <div
+                        className="alert alert-success text-center"
+                        role="alert"
+                      >
+                        A password reset link has been sent!
                       </div>
+                    )}
 
-                      <div className="form-group text-center">
-                        <button
-                          type="submit"
-                          className={classNames('btn btn-primary', {
-                            'btn-loading': loading,
-                          })}
-                        >
-                          Send Password Reset Email
-                        </button>
+                    {response.error && (
+                      <div
+                        className="alert alert-danger text-center"
+                        role="alert"
+                      >
+                        {response.message}
                       </div>
+                    )}
 
-                    </form>
-                    }
+                    {!this.state.success && (
+                      <form
+                        className="form-horizontal"
+                        method="POST"
+                        onSubmit={this.handleSubmit}
+                        ref={el => {
+                          this.forgotPasswordForm = el;
+                        }}
+                      >
+                        <div className="form-group">
+                          <label htmlFor="email">Email Address</label>
+                          <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            className={classNames("form-control", {
+                              "is-invalid": "email" in errors
+                            })}
+                            placeholder="Enter email"
+                            required
+                            onChange={this.handleChange}
+                            onBlur={this.handleBlur}
+                            disabled={loading}
+                          />
 
+                          {"email" in errors && (
+                            <div className="invalid-feedback">
+                              {errors.email}
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="form-group text-center">
+                          <button
+                            type="submit"
+                            className={classNames("btn btn-primary", {
+                              "btn-loading": loading
+                            })}
+                          >
+                            Send Password Reset Email
+                          </button>
+                        </div>
+                      </form>
+                    )}
                   </div>
                 </div>
-
               </div>
-
             </div>
           </div>
         </div>
@@ -192,9 +197,9 @@ class ForgotPassword extends Component {
 ForgotPassword.defaultProps = {
   location: {
     state: {
-      pathname: '/',
-    },
-  },
+      pathname: "/"
+    }
+  }
 };
 
 ForgotPassword.propTypes = {
@@ -202,13 +207,13 @@ ForgotPassword.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     state: {
-      pathname: PropTypes.string,
-    },
-  }),
+      pathname: PropTypes.string
+    }
+  })
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.Auth.isAuthenticated,
+  isAuthenticated: state.Auth.isAuthenticated
 });
 
 export default connect(mapStateToProps)(ForgotPassword);
