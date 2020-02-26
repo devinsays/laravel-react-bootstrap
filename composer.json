@@ -5,12 +5,12 @@
     "type": "project",
     "require": {
         "php": "^7.2",
-        "barryvdh/laravel-cors": "^0.11.0",
         "fideloper/proxy": "^4.0",
+        "fruitcake/laravel-cors": "^1.0",
+        "hashids/hashids": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
-        "tymon/jwt-auth": "^1.0.0",
-        "hashids/hashids": "^4.0"
+        "tymon/jwt-auth": "^1.0.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -37,8 +37,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {

@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 
 // Auth Endpoints
 Route::group([
-    'middleware' => 'cors',
     'prefix' => 'v1/auth'
 ], function ($router) {
     Route::post('login', 'Auth\LoginController@login');
@@ -27,7 +26,6 @@ Route::group([
 
 // Resource Endpoints
 Route::group([
-    'middleware' => 'cors',
     'prefix' => 'v1'
 ], function ($router) {
     Route::apiResource('todo', 'TodoController');
