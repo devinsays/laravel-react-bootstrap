@@ -2,9 +2,8 @@
 
 namespace App\Exceptions;
 
-use App;
-use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -30,10 +29,12 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $exception
      * @return void
+     *
+     * @throws \Exception
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -42,58 +43,13 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
-     */
-    public function render($request, Exception $exception)
-    {
-        // Catches known exceptions on API routes.
-        if ($request->is('api/*')) {
-            $response = $this->apiResponse($request, $exception);
-            if ($response) {
-                return response()->json($response, $response['status']);
-            }
-        }
-
-        // Catches unknown exceptions on API routes in production.
-        if ($request->is('api/*') && App::environment('production')) {
-            return [
-                'status' => 500,
-                'message' => 'Server error.'
-            ];
-        }
-
-        return parent::render($request, $exception);
-    }
-
-    /**
-     * Render an exception into an HTTP response.
+     * @param  \Throwable  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return array|boolean $response
+     * @throws \Throwable
      */
-    public function apiResponse($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
-
-        // Method not allowed.
-        if (get_class($exception) === "Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException") {
-            $method = $request->method();
-            return [
-                'status' => 405,
-                'message' =>  "$method method is not allowed for the requested route."
-            ];
-        }
-
-        // Resource not found.
-        if (get_class($exception) === "Illuminate\Database\Eloquent\ModelNotFoundException") {
-            return [
-                'status' => 404,
-                'message' => 'Resource not found.'
-            ];
-        }
-
-        // If it's not one of these known exceptions, return false.
-        return false;
+        return parent::render($request, $exception);
     }
 }
