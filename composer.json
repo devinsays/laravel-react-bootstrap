@@ -1,6 +1,6 @@
 {
-    "name": "Laravel React To Do App",
-    "description": "Example to-do app built with Laravel and React.",
+    "name": "devinsays/laravel-react-bootstrap",
+    "description": "Example to do app built with Laravel and React.",
     "license": "MIT",
     "type": "project",
     "require": {
@@ -11,7 +11,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "hashids/hashids": "^4.0",
-        "tymon/jwt-auth": "^1.0.0"
+        "tymon/jwt-auth": "^1.0.0",
+        "laravel/ui": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
