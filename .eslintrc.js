@@ -10,6 +10,7 @@ module.exports = {
       },
       allowChildren: false,
     }],
+    "react/jsx-props-no-spreading": "off",
   },
   env: {
     browser: true,
