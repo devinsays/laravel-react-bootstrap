@@ -1,33 +1,33 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import ReeValidate from "ree-validate";
-import classNames from "classnames";
-import AuthService from "../services";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import ReeValidate from 'ree-validate';
+import classNames from 'classnames';
+import AuthService from '../services';
 
 class Home extends Component {
   constructor() {
     super();
 
     this.validator = new ReeValidate({
-      email: "required|email",
-      password: "required|min:6"
+      email: 'required|email',
+      password: 'required|min:6',
     });
 
     this.state = {
       loading: false,
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       errors: {},
       response: {
         error: false,
-        message: ""
-      }
+        message: '',
+      },
     };
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
 
@@ -44,11 +44,11 @@ class Home extends Component {
     }
   };
 
-  handleBlur = e => {
+  handleBlur = (e) => {
     const { name, value } = e.target;
 
     // Avoid validation until input has a value.
-    if (value === "") {
+    if (value === '') {
       return;
     }
 
@@ -62,15 +62,15 @@ class Home extends Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
     const credentials = {
       email,
-      password
+      password,
     };
 
-    this.validator.validateAll(credentials).then(success => {
+    this.validator.validateAll(credentials).then((success) => {
       if (success) {
         this.setState({ loading: true });
         this.submit(credentials);
@@ -78,14 +78,14 @@ class Home extends Component {
     });
   };
 
-  submit = credentials => {
-    this.props.dispatch(AuthService.login(credentials)).catch(err => {
+  submit = (credentials) => {
+    this.props.dispatch(AuthService.login(credentials)).catch((err) => {
       this.loginForm.reset();
       const errors = Object.values(err.errors);
-      errors.join(" ");
+      errors.join(' ');
       const response = {
         error: true,
-        message: errors
+        message: errors,
       };
       this.setState({ response });
       this.setState({ loading: false });
@@ -94,7 +94,7 @@ class Home extends Component {
 
   render() {
     // If user is already authenticated we redirect to entry location.
-    const { from } = this.props.location.state || { from: { pathname: "/" } };
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { isAuthenticated } = this.props;
     if (isAuthenticated) {
       return <Redirect to={from} />;
@@ -112,7 +112,8 @@ class Home extends Component {
                   <h2>Example To Do App</h2>
                   <p>
                     Built with Laravel and React. Includes JWT auth,
-                    registration, login, routing and tests.{" "}
+                    registration, login, routing and tests.
+                    {' '}
                     <a href="https://wptheming.com/2019/02/building-a-react-app-on-laravel/">
                       Learn more
                     </a>
@@ -134,7 +135,7 @@ class Home extends Component {
                       className="form-horizontal"
                       method="POST"
                       onSubmit={this.handleSubmit}
-                      ref={el => {
+                      ref={(el) => {
                         this.loginForm = el;
                       }}
                     >
@@ -150,8 +151,8 @@ class Home extends Component {
                           id="email"
                           type="email"
                           name="email"
-                          className={classNames("form-control", {
-                            "is-invalid": "email" in errors
+                          className={classNames('form-control', {
+                            'is-invalid': 'email' in errors,
                           })}
                           placeholder="Enter email"
                           required
@@ -160,7 +161,7 @@ class Home extends Component {
                           disabled={loading}
                         />
 
-                        {"email" in errors && (
+                        {'email' in errors && (
                           <div className="invalid-feedback">{errors.email}</div>
                         )}
                       </div>
@@ -170,8 +171,8 @@ class Home extends Component {
                         <input
                           id="password"
                           type="password"
-                          className={classNames("form-control", {
-                            "is-invalid": "password" in errors
+                          className={classNames('form-control', {
+                            'is-invalid': 'password' in errors,
                           })}
                           name="password"
                           placeholder="Enter password"
@@ -180,7 +181,7 @@ class Home extends Component {
                           onBlur={this.handleBlur}
                           disabled={loading}
                         />
-                        {"password" in errors && (
+                        {'password' in errors && (
                           <div className="invalid-feedback">
                             {errors.password}
                           </div>
@@ -190,8 +191,8 @@ class Home extends Component {
                       <div className="form-group text-center">
                         <button
                           type="submit"
-                          className={classNames("btn btn-primary", {
-                            "btn-loading": loading
+                          className={classNames('btn btn-primary', {
+                            'btn-loading': loading,
                           })}
                         >
                           Sign In
@@ -199,8 +200,10 @@ class Home extends Component {
                       </div>
 
                       <div className="login-invite-text text-center">
-                        {"Don't have an account?"}{" "}
-                        <Link to="/register">Register</Link>.
+                        {"Don't have an account?"}
+                        {' '}
+                        <Link to="/register">Register</Link>
+                        .
                       </div>
                     </form>
                   </div>
@@ -220,11 +223,11 @@ class Home extends Component {
 
 Home.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.Auth.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.Auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(Home);

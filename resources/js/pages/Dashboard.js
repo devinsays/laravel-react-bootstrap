@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Http from "../Http";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Http from '../Http';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -10,46 +10,46 @@ class Dashboard extends Component {
     this.state = {
       todo: null,
       error: false,
-      data: []
+      data: [],
     };
 
     // API endpoint.
-    this.api = "/api/v1/todo";
+    this.api = '/api/v1/todo';
   }
 
   componentDidMount() {
     Http.get(`${this.api}?status=open`)
-      .then(response => {
+      .then((response) => {
         const { data } = response.data;
         this.setState({
           data,
-          error: false
+          error: false,
         });
       })
       .catch(() => {
         this.setState({
-          error: "Unable to fetch data."
+          error: 'Unable to fetch data.',
         });
       });
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { todo } = this.state;
     this.addTodo(todo);
   };
 
-  addTodo = todo => {
+  addTodo = (todo) => {
     Http.post(this.api, { value: todo })
       .then(({ data }) => {
         const newItem = {
           id: data.id,
-          value: todo
+          value: todo,
         };
         const allTodos = [newItem, ...this.state.data];
         this.setState({ data: allTodos, todo: null });
@@ -57,25 +57,25 @@ class Dashboard extends Component {
       })
       .catch(() => {
         this.setState({
-          error: "Sorry, there was an error saving your to do."
+          error: 'Sorry, there was an error saving your to do.',
         });
       });
   };
 
-  closeTodo = e => {
+  closeTodo = (e) => {
     const { key } = e.target.dataset;
     const { data: todos } = this.state;
 
-    Http.patch(`${this.api}/${key}`, { status: "closed" })
+    Http.patch(`${this.api}/${key}`, { status: 'closed' })
       .then(() => {
         const updatedTodos = todos.filter(
-          todo => todo.id !== parseInt(key, 10)
+          (todo) => todo.id !== parseInt(key, 10),
         );
         this.setState({ data: updatedTodos });
       })
       .catch(() => {
         this.setState({
-          error: "Sorry, there was an error closing your to do."
+          error: 'Sorry, there was an error closing your to do.',
         });
       });
   };
@@ -90,7 +90,7 @@ class Dashboard extends Component {
           <form
             method="post"
             onSubmit={this.handleSubmit}
-            ref={el => {
+            ref={(el) => {
               this.todoForm = el;
             }}
           >
@@ -126,7 +126,7 @@ class Dashboard extends Component {
                 <th>To Do</th>
                 <th>Action</th>
               </tr>
-              {data.map(todo => (
+              {data.map((todo) => (
                 <tr key={todo.id}>
                   <td>{todo.value}</td>
                   <td>
@@ -149,9 +149,9 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.Auth.isAuthenticated,
-  user: state.Auth.user
+  user: state.Auth.user,
 });
 
 export default connect(mapStateToProps)(Dashboard);
