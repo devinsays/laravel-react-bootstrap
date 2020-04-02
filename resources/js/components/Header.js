@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Nav,
   NavItem,
@@ -8,12 +8,12 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
-} from "reactstrap";
-import * as actions from "../store/actions";
+  DropdownItem,
+} from 'reactstrap';
+import * as actions from '../store/actions';
 
 class Header extends Component {
-  handleLogout = e => {
+  handleLogout = (e) => {
     e.preventDefault();
     this.props.dispatch(actions.authLogout());
   };
@@ -53,8 +53,8 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.Auth.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.Auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(Header);

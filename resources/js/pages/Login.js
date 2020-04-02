@@ -1,33 +1,33 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import ReeValidate from "ree-validate";
-import classNames from "classnames";
-import AuthService from "../services";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import ReeValidate from 'ree-validate';
+import classNames from 'classnames';
+import AuthService from '../services';
 
 class Login extends Component {
   constructor() {
     super();
 
     this.validator = new ReeValidate({
-      email: "required|email",
-      password: "required|min:6"
+      email: 'required|email',
+      password: 'required|min:6',
     });
 
     this.state = {
       loading: false,
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       errors: {},
       response: {
         error: false,
-        message: ""
-      }
+        message: '',
+      },
     };
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
 
@@ -44,11 +44,11 @@ class Login extends Component {
     }
   };
 
-  handleBlur = e => {
+  handleBlur = (e) => {
     const { name, value } = e.target;
 
     // Avoid validation until input has a value.
-    if (value === "") {
+    if (value === '') {
       return;
     }
 
@@ -62,18 +62,18 @@ class Login extends Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
     const credentials = {
       email,
-      password
+      password,
     };
 
     // Set response state back to default.
-    this.setState({ response: { error: false, message: "" } });
+    this.setState({ response: { error: false, message: '' } });
 
-    this.validator.validateAll(credentials).then(success => {
+    this.validator.validateAll(credentials).then((success) => {
       if (success) {
         this.setState({ loading: true });
         this.submit(credentials);
@@ -82,13 +82,14 @@ class Login extends Component {
   };
 
   submit(credentials) {
-    this.props.dispatch(AuthService.login(credentials)).catch(err => {
+    const { dispatch } = this.props;
+    dispatch(AuthService.login(credentials)).catch((err) => {
       this.loginForm.reset();
       const errors = Object.values(err.errors);
-      errors.join(" ");
+      errors.join(' ');
       const response = {
         error: true,
-        message: errors
+        message: errors,
       };
       this.setState({ response });
       this.setState({ loading: false });
@@ -97,7 +98,8 @@ class Login extends Component {
 
   render() {
     // If user is already authenticated we redirect to entry location.
-    const { from } = this.props.location.state || { from: { pathname: "/" } };
+    const { location: state } = this.props;
+    const { from } = state || { from: { pathname: '/' } };
     const { isAuthenticated } = this.props;
     if (isAuthenticated) {
       return <Redirect to={from} />;
@@ -128,47 +130,51 @@ class Login extends Component {
                       className="form-horizontal"
                       method="POST"
                       onSubmit={this.handleSubmit}
-                      ref={el => {
+                      ref={(el) => {
                         this.loginForm = el;
                       }}
                     >
                       <div className="form-group">
-                        <label htmlFor="email">Email Address</label>
-                        <input
-                          id="email"
-                          type="email"
-                          name="email"
-                          className={classNames("form-control", {
-                            "is-invalid": "email" in errors
-                          })}
-                          placeholder="Enter email"
-                          required
-                          onChange={this.handleChange}
-                          onBlur={this.handleBlur}
-                          disabled={loading}
-                        />
+                        <label htmlFor="email">
+                          Email Address
+                          <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            className={classNames('form-control', {
+                              'is-invalid': 'email' in errors,
+                            })}
+                            placeholder="Enter email"
+                            required
+                            onChange={this.handleChange}
+                            onBlur={this.handleBlur}
+                            disabled={loading}
+                          />
+                        </label>
 
-                        {"email" in errors && (
+                        {'email' in errors && (
                           <div className="invalid-feedback">{errors.email}</div>
                         )}
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                          id="password"
-                          type="password"
-                          className={classNames("form-control", {
-                            "is-invalid": "password" in errors
-                          })}
-                          name="password"
-                          placeholder="Enter password"
-                          required
-                          onChange={this.handleChange}
-                          onBlur={this.handleBlur}
-                          disabled={loading}
-                        />
-                        {"password" in errors && (
+                        <label htmlFor="password">
+                          Password
+                          <input
+                            id="password"
+                            type="password"
+                            className={classNames('form-control', {
+                              'is-invalid': 'password' in errors,
+                            })}
+                            name="password"
+                            placeholder="Enter password"
+                            required
+                            onChange={this.handleChange}
+                            onBlur={this.handleBlur}
+                            disabled={loading}
+                          />
+                        </label>
+                        {'password' in errors && (
                           <div className="invalid-feedback">
                             {errors.password}
                           </div>
@@ -178,8 +184,8 @@ class Login extends Component {
                       <div className="form-group text-center">
                         <button
                           type="submit"
-                          className={classNames("btn btn-primary", {
-                            "btn-loading": loading
+                          className={classNames('btn btn-primary', {
+                            'btn-loading': loading,
                           })}
                         >
                           Sign In
@@ -187,7 +193,8 @@ class Login extends Component {
                       </div>
 
                       <div className="login-invite-text text-center">
-                        No account?{" "}
+                        No account?
+                        {' '}
                         <Link to="/register" href="/register">
                           Register
                         </Link>
@@ -214,9 +221,9 @@ class Login extends Component {
 Login.defaultProps = {
   location: {
     state: {
-      pathname: "/"
-    }
-  }
+      pathname: '/',
+    },
+  },
 };
 
 Login.propTypes = {
@@ -224,13 +231,13 @@ Login.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     state: {
-      pathname: PropTypes.string
-    }
-  })
+      pathname: PropTypes.string,
+    },
+  }),
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.Auth.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.Auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(Login);
