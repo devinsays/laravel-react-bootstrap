@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\ApiResouce;
 use App\Custom\Hasher;
 
 class TodoResource extends ApiResource
