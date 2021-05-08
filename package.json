@@ -15,7 +15,7 @@
         "classnames": "^2.2.6",
         "cross-env": "^7.0.2",
         "laravel-mix": "^5.0.4",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "popper.js": "^1.16.1",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
