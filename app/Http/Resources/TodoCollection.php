@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\ApiResourceCollection;
-use App\Http\Resources\TodoResource;
 
 class TodoCollection extends ApiResourceCollection
 {
@@ -15,11 +14,6 @@ class TodoCollection extends ApiResourceCollection
      */
     public function toArray($request)
     {
-        // Transforms the collection to match format in TodoResource.
-        $this->collection->transform(function (TodoResource $todo) {
-            return (new TodoResource($todo));
-        });
-
         return parent::toArray($request);
     }
 }
