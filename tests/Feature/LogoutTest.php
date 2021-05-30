@@ -17,7 +17,7 @@ class LogoutTest extends TestCase
     /** @test */
     public function tokenCanBeLoggedOut()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'password' => Hash::make('password')
         ]);
 

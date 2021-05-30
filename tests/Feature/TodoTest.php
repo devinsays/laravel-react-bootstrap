@@ -31,7 +31,7 @@ class TodoTest extends TestCase
     public function registeredUserCanStoreTodo()
     {
 
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->json('POST', $this->api_todo, $this->todo);
         $response->assertStatus(201);
 
@@ -43,8 +43,8 @@ class TodoTest extends TestCase
     /** @test */
     public function userCanDeleteTheirTodo()
     {
-        $user = factory(User::class)->create();
-        $todo = factory(Todo::class)->create(['user_id' => $user->id]);
+        $user = User::factory()->create();
+        $todo = Todo::factory()->create(['user_id' => $user->id]);
 
         $endpoint = $this->api_todo . '/' . $todo->id;
 
@@ -59,9 +59,9 @@ class TodoTest extends TestCase
     /** @test */
     public function userCannotDeleteDifferentUserTodo()
     {
-        $user = factory(User::class)->create();
-        $author = factory(User::class)->create();
-        $todo = factory(Todo::class)->create(['user_id' => $author->id]);
+        $user = User::factory()->create();
+        $author = User::factory()->create();
+        $todo = Todo::factory()->create(['user_id' => $author->id]);
 
         $endpoint = $this->api_todo . '/' . $todo->id;
 
@@ -76,8 +76,8 @@ class TodoTest extends TestCase
     /** @test */
     public function userCanPatchTheirTodo()
     {
-        $user = factory(User::class)->create();
-        $todo = factory(Todo::class)->create([
+        $user = User::factory()->create();
+        $todo = Todo::factory()->create([
             'user_id' => $user->id,
             'status' => 'open'
         ]);
@@ -96,9 +96,9 @@ class TodoTest extends TestCase
     /** @test */
     public function userCannotPatchDifferentUserTodo()
     {
-        $user = factory(User::class)->create();
-        $author = factory(User::class)->create();
-        $todo = factory(Todo::class)->create([
+        $user = User::factory()->create();
+        $author = User::factory()->create();
+        $todo = Todo::factory()->create([
             'user_id' => $author->id,
             'status' => 'open'
         ]);
@@ -117,12 +117,12 @@ class TodoTest extends TestCase
     /** @test */
     public function userCanGetTheirTodos()
     {
-        $user = factory(User::class)->create();
-        $todo = factory(Todo::class, 20)->create([
+        $user = User::factory()->create();
+        $todo = Todo::factory()->count(20)->create([
             'user_id' => $user->id,
             'status' => 'open'
         ]);
-        $todo = factory(Todo::class, 30)->create([
+        $todo = Todo::factory()->count(30)->create([
             'user_id' => $user->id,
             'status' => 'closed'
         ]);
