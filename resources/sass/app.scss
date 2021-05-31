@@ -5,11 +5,6 @@
 @import '~bootstrap/scss/bootstrap';
 
 // General
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 .grid {
     display: grid;
 }
@@ -20,6 +15,19 @@ a {
   &:hover {
     text-decoration: underline;
   }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
 }
 
 // Buttons
@@ -68,10 +76,6 @@ $btn-size-base: 1rem;
     to {
         transform: rotate(360deg);
     }
-}
-
-.form-group {
-  margin-bottom: 1rem;
 }
 
 // Header
