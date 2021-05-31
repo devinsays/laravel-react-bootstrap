@@ -25,7 +25,7 @@
         "redux": "^4.1.0",
         "redux-persist": "^6.0.0",
         "redux-thunk": "^2.3.0",
-        "ree-validate": "3.3.2",
+        "ree-validate": "3.0.2",
         "resolve-url-loader": "^4.0.0"
     },
     "devDependencies": {
