@@ -42,7 +42,7 @@ class PasswordResetTest extends TestCase
         ]);
 
         // Post to the API with a properly formatted email that is in database.
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->json('POST', $this->api . '/forgot-password', ['email' => $user['email']]);
         $response->assertStatus(200)->assertJson([
             'status' => 200,
@@ -73,7 +73,7 @@ class PasswordResetTest extends TestCase
         Notification::fake();
 
         // Create a user.
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $token = '';
 
         $response = $this->json('POST', $this->api . '/forgot-password', ['email' => $user['email']]);

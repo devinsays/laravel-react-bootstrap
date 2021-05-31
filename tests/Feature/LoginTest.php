@@ -17,7 +17,7 @@ class LoginTest extends TestCase
     /** @test */
     public function registeredUserCanLogin()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'password' => Hash::make('password')
         ]);
 

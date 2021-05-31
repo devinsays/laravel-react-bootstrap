@@ -132,7 +132,7 @@ class ResetPassword extends Component {
         <div className="d-flex flex-column flex-row align-content-center py-5">
           <div className="container">
             <div className="row">
-              <div className="section-login col-lg-6 ml-auto mr-auto">
+              <div className="section-login col-lg-6 mx-auto">
                 <h4>Password Reset</h4>
 
                 <div className="card-login card mb-3">

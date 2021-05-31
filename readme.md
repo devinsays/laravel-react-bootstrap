@@ -85,7 +85,7 @@ _If you don't have Node and NPM installed, [instructions here](https://www.npmjs
 #### Run an initial build:
 
 ```bash
-npm run dev
+npm run development
 ```
 
 ### Additional Set Up Tips

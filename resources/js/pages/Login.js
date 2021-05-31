@@ -112,7 +112,7 @@ class Login extends Component {
         <div className="d-flex flex-column flex-row align-content-center py-5">
           <div className="container">
             <div className="row">
-              <div className="section-login col-lg-6 ml-auto mr-auto">
+              <div className="section-login col-lg-6 mx-auto">
                 <h4>Log in to the App</h4>
 
                 <div className="card-login card mb-3">
@@ -134,23 +134,21 @@ class Login extends Component {
                         this.loginForm = el;
                       }}
                     >
-                      <div className="form-group">
-                        <label htmlFor="email">
-                          Email Address
-                          <input
-                            id="email"
-                            type="email"
-                            name="email"
-                            className={classNames('form-control', {
-                              'is-invalid': 'email' in errors,
-                            })}
-                            placeholder="Enter email"
-                            required
-                            onChange={this.handleChange}
-                            onBlur={this.handleBlur}
-                            disabled={loading}
-                          />
-                        </label>
+                      <div className="form-group mb-2">
+                      <label htmlFor="email">Email Address</label>
+                        <input
+                          id="email"
+                          type="email"
+                          name="email"
+                          className={classNames('form-control', {
+                            'is-invalid': 'email' in errors,
+                          })}
+                          placeholder="Enter email"
+                          required
+                          onChange={this.handleChange}
+                          onBlur={this.handleBlur}
+                          disabled={loading}
+                        />
 
                         {'email' in errors && (
                           <div className="invalid-feedback">{errors.email}</div>
@@ -158,22 +156,20 @@ class Login extends Component {
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="password">
-                          Password
-                          <input
-                            id="password"
-                            type="password"
-                            className={classNames('form-control', {
-                              'is-invalid': 'password' in errors,
-                            })}
-                            name="password"
-                            placeholder="Enter password"
-                            required
-                            onChange={this.handleChange}
-                            onBlur={this.handleBlur}
-                            disabled={loading}
-                          />
-                        </label>
+                        <label htmlFor="password">Password</label>
+                        <input
+                          id="password"
+                          type="password"
+                          className={classNames('form-control', {
+                            'is-invalid': 'password' in errors,
+                          })}
+                          name="password"
+                          placeholder="Enter password"
+                          required
+                          onChange={this.handleChange}
+                          onBlur={this.handleBlur}
+                          disabled={loading}
+                        />
                         {'password' in errors && (
                           <div className="invalid-feedback">
                             {errors.password}

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\APIController;
 
-class LoginController extends APIController
+class LoginController extends ApiController
 {
 
     /**

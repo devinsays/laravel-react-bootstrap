@@ -34,7 +34,7 @@ class RegistrationTest extends TestCase
     /** @test */
     public function existingUserCannotRegister()
     {
-        $existing_user = factory(User::class)->create();
+        $existing_user = User::factory()->create();
         $user = [
             'name' => $existing_user->name,
             'email' => $existing_user->email,

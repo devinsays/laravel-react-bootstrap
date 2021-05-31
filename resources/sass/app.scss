@@ -1,16 +1,35 @@
 // Variables
 @import "variables";
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-// General
-img {
-    max-width: 100%;
-    height: auto;
-}
 
+// General
 .grid {
     display: grid;
 }
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
 // Buttons
 $btn-size-base: 1rem;
 

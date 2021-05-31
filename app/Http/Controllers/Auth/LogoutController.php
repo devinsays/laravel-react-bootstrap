@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\APIController;
+use App\Http\Controllers\ApiController;
 
 class LogoutController extends APIController
 {
