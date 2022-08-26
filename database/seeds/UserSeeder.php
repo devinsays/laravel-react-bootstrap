@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         ]);
 
         // Create another five user accounts.
-        factory(User::class, 5)->create();
+        User::factory(5)->create();
 
         $this->command->info('Users table seeded.');
     }
